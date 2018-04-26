@@ -1,0 +1,10 @@
+<p>
+  <input type=text [(ngModel)]="searchText" (ngModelChange)="getSearchResults()">
+</p>
+<ng-container *ngFor="let res of searchResults">
+  <div>
+    <img src= "{{ posterUrl(res.poster_path) }}" />
+    {{res.title}}
+    <button (click)="saveMovie(res)">Add</button>
+  </div>
+</ng-container>

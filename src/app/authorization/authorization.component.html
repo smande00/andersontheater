@@ -1,0 +1,11 @@
+<label for="email" class="label">Enter email to login</label><br>
+<input type="email" class="input" [(ngModel)]="email">
+
+
+<button class="button is-primary"
+        [disabled]="emailSent"
+        (click)="sendEmailLink()">
+
+  Get Login Link
+
+</button>

@@ -1,0 +1,14 @@
+<div style="float:left;  margin:5px;" [@zoomIn]
+     [@active]="this.activeState"
+     (mouseenter)="setActive('active')" (mouseleave)="setActive('inactive')"
+     [class.mat-elevation-z2]="!isActive()" [class.mat-elevation-z8]="isActive()"
+>
+  <div style="width:90px;height:135px;padding:5px">
+    <img src= "{{ posterUrl(this.movieData.poster_path) }}" />
+    <i style="cursor:pointer; position:relative; top:-40px; left:0px; opacity:.7; background-color:wheat; border-radius:30px; font-size:24px; padding:5px; " (click)="delete()" class="material-icons">delete</i>
+  </div>
+  <div style="max-width:100px; background-color:darkgray;  white-space: nowrap;    overflow: hidden;    text-overflow: ellipsis;" >
+    {{this.movieData.title}}
+  </div>
+
+</div>
