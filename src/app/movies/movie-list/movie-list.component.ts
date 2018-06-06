@@ -22,6 +22,7 @@ export class MovieListComponent implements OnInit {
   lastKey : any;
   allMovies:MovieDTO[] = [];
   filterChanged: Subject<string> = new Subject<string>();
+  hasMoreResults:boolean;
   movieViewPort$: BehaviorSubject<MovieDTO[]> = new BehaviorSubject<MovieDTO[]>([]);
   searchText:string=""  ;
   viewPortStart:number = 0;
@@ -31,16 +32,7 @@ export class MovieListComponent implements OnInit {
   toolbarHeight:number=100;
 
   constructor(private movieService: MoviesService) {
-    this.filterChanged
-      .debounceTime(200) // wait 200ms after the last event before emitting last event
-      .distinctUntilChanged() // only emit if value is different from previous value
-      .subscribe(() => {
-          this.viewPortStart = 0;
-          this.loadViewPort();
-        },
-        error => {
-          console.log(error);
-        });
+
   }
 
   ngOnInit() {
@@ -52,6 +44,19 @@ export class MovieListComponent implements OnInit {
           innerHeight: window.innerHeight
         }
     });
+
+    //We could probably get away without the Behavior subject and just do this inside the getSearchResults() method
+    //However, using the Behavior Subject's debouncing is probably kinder to mobile devices/large datasets.
+    this.filterChanged
+      .debounceTime(200) // wait 200ms after the last event before emitting last event
+      .distinctUntilChanged() // only do something if the searchText value is different
+      .subscribe(() => {
+          this.viewPortStart = 0;
+          this.loadViewPort();
+        },
+        error => {
+          console.log(error);
+        });
   }
 
   mapData(obs : Observable<DocumentChangeAction[]>) {
@@ -71,19 +76,21 @@ export class MovieListComponent implements OnInit {
     let rowsOfBoxes = Math.floor(($event.target.innerHeight - this.toolbarHeight)/this.boxHeight);
     this.viewPortSize = boxesPerRow * rowsOfBoxes;
     this.loadViewPort();
-    console.log(boxesPerRow);
-    console.log(rowsOfBoxes);
-    console.log( $event.target.innerWidth);
-    console.log( $event.target.innerHeight);
   }
 
   loadViewPort(){
-    let nextSet = this.allMovies
+
+    let filteredSet = this.allMovies
       .filter((f)=> {
         if(f.title.toLowerCase().indexOf(this.searchText.toLowerCase())!==-1 || this.searchText===""){
           return f;
-        }})
+        }});
+    this.hasMoreResults = (filteredSet.length > this.viewPortStart + this.viewPortSize);
+
+    let nextSet = filteredSet
       .slice(this.viewPortStart,this.viewPortSize + this.viewPortStart);
+
+
     this.movieViewPort$.next(nextSet);
   }
 
