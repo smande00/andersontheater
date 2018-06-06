@@ -1,9 +1,7 @@
-<div class="mat-toolbar" style="height:65px; text-align:center;" (window:resize)="onResize($event)">
-
-    <button *ngIf ="viewPortStart !== 0" style="float:left" mat-button color="primary" (click) = "updateViewPort(-1*viewPortSize)" class="mat-fab"> Previous </button>
-  <span> Filter: <input type="text" width="200" style="margin-top:25px;" [(ngModel)]="searchText" (ngModelChange)="getSearchResults()"/> </span>
-    <button *ngIf="hasMoreResults" style="float:right; margin-right:20px;" mat-button class="mat-fab" color="primary" (click) = "updateViewPort(viewPortSize)"> Next </button>
-
+<div class="mat-toolbar" style="height:50px; position:fixed; bottom:0; width:100%; text-align:center;" (window:resize)="onResize($event)">
+    <button *ngIf ="viewPortStart !== 0" style="float:left" mat-button color="primary" (click) = "updateViewPort(-1*viewPortSize)" class="mat-mini-fab"> Prev </button>
+    <span> Filter: <input type="text" width="200" [(ngModel)]="searchText" (ngModelChange)="getSearchResults()"/> </span>
+    <button *ngIf="hasMoreResults" style="float:right; margin-right:20px;" mat-button class="mat-mini-fab" color="primary" (click) = "updateViewPort(viewPortSize)"> Next </button>
 </div>
 
 

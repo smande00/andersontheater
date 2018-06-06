@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule} from '@angular/forms'
 
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule, MatMenuModule, MatIconModule } from '@angular/material';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule} from 'angularfire2/auth';
@@ -40,7 +40,7 @@ import { MovieBoxComponent } from './movies/movie-box/movie-box.component';
     AngularFireAuthModule,
     AppRoutingModule,
     HttpClientModule,
-    MatButtonModule
+    MatButtonModule,MatIconModule,  MatMenuModule
   ],
   providers: [AngularFirestoreProvider, MoviesService, MovieDbapiserviceService],
   bootstrap: [AppComponent]

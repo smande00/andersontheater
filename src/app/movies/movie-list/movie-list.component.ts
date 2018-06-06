@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {Observable} from "rxjs/Observable";
 import {MoviesService} from "../services/movies.service";
@@ -28,8 +28,8 @@ export class MovieListComponent implements OnInit {
   viewPortStart:number = 0;
   viewPortSize:number = 36;
   boxWidth:number= 110;
-  boxHeight:number=163;
-  toolbarHeight:number=100;
+  boxHeight:number=170;
+  toolbarHeight:number=85;
 
   constructor(private movieService: MoviesService) {
 
