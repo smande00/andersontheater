@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MovieDTO} from "../MovieDTO";
 import {MoviesService} from "../services/movies.service";
 import {MovieDbapiserviceService} from "../services/movie-dbapiservice.service";
@@ -30,6 +30,7 @@ import {animate, style, transition, trigger} from "@angular/animations";
 })
 export class MovieBoxComponent implements OnInit {
   @Input()  movieData:MovieDTO;
+  @Output() movieClicked = new EventEmitter();
   activeState:string="inactive";
 
   constructor(private movieService: MoviesService, private movieDbAPI: MovieDbapiserviceService) { }
@@ -48,5 +49,8 @@ export class MovieBoxComponent implements OnInit {
   }
   isActive():boolean{
     return this.activeState == "active";
+  }
+  onClicked(){
+    this.movieClicked.emit(this.movieData);
   }
 }

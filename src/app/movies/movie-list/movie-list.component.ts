@@ -8,6 +8,8 @@ import {DocumentChangeAction} from "angularfire2/firestore";
 import {Subject} from "rxjs/Subject";
 import 'rxjs/add/operator/debounceTime';
 import "rxjs/add/operator/distinctUntilChanged";
+import {MatDialog} from "@angular/material";
+import {MovieDetailComponent} from "../movie-detail/movie-detail.component";
 
 
 
@@ -31,7 +33,7 @@ export class MovieListComponent implements OnInit {
   boxHeight:number=170;
   toolbarHeight:number=85;
 
-  constructor(private movieService: MoviesService) {
+  constructor(private movieService: MoviesService, public dialog: MatDialog) {
 
   }
 
@@ -68,6 +70,13 @@ export class MovieListComponent implements OnInit {
         this.allMovies.push(doc.payload.doc.data());
       });
       this.loadViewPort();
+    });
+  }
+
+  onMovieClicked($event:MovieDTO){
+    let dialogRef = this.dialog.open(MovieDetailComponent, {
+      width: '250px',
+      data: $event
     });
   }
 

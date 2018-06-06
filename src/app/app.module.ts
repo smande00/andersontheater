@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule} from '@angular/forms'
 
-import { MatButtonModule, MatMenuModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatMenuModule, MatIconModule, MatDialogModule } from '@angular/material';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule} from 'angularfire2/auth';
@@ -20,6 +20,7 @@ import {MoviesService} from "./movies/services/movies.service";
 import {MovieDbapiserviceService} from "./movies/services/movie-dbapiservice.service";
 import { AuthorizationComponent } from './authorization/authorization.component';
 import { MovieBoxComponent } from './movies/movie-box/movie-box.component';
+import { MovieDetailComponent } from './movies/movie-detail/movie-detail.component';
 
 
 
@@ -29,7 +30,8 @@ import { MovieBoxComponent } from './movies/movie-box/movie-box.component';
     MovieListComponent,
     EditMovieComponent,
     AuthorizationComponent,
-    MovieBoxComponent
+    MovieBoxComponent,
+    MovieDetailComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -40,9 +42,10 @@ import { MovieBoxComponent } from './movies/movie-box/movie-box.component';
     AngularFireAuthModule,
     AppRoutingModule,
     HttpClientModule,
-    MatButtonModule,MatIconModule,  MatMenuModule
+    MatButtonModule,MatIconModule,  MatMenuModule, MatDialogModule
   ],
   providers: [AngularFirestoreProvider, MoviesService, MovieDbapiserviceService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[MovieDetailComponent]
 })
 export class AppModule { }

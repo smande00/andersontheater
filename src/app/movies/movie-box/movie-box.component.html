@@ -2,6 +2,7 @@
      [@active]="this.activeState"
      (mouseenter)="setActive('active')" (mouseleave)="setActive('inactive')"
      [class.mat-elevation-z2]="!isActive()" [class.mat-elevation-z8]="isActive()"
+     (click)="onClicked()"
 >
   <div style="width:90px;height:135px;padding:5px">
     <img src= "{{ posterUrl(this.movieData.poster_path) }}" />

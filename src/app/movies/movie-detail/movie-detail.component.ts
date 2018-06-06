@@ -1,0 +1,21 @@
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
+import {MovieDTO} from "../MovieDTO";
+
+@Component({
+  selector: 'app-movie-detail',
+  templateUrl: './movie-detail.component.html',
+  styleUrls: ['./movie-detail.component.css']
+})
+export class MovieDetailComponent implements OnInit {
+
+  constructor(  public dialogRef: MatDialogRef<MovieDetailComponent>,
+                @Inject(MAT_DIALOG_DATA) public data: MovieDTO)  { }
+
+  ngOnInit() {
+  }
+
+  closeClick(): void {
+    this.dialogRef.close();
+  }
+}

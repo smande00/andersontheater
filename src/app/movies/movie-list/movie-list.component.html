@@ -6,6 +6,6 @@
 
 
 <ng-container *ngFor="let movie of movieViewPort$ | async">
-  <app-movie-box [movieData]="movie"></app-movie-box>
+  <app-movie-box [movieData]="movie" (movieClicked)="onMovieClicked($event)"></app-movie-box>
 </ng-container>
 
