@@ -16,11 +16,7 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.isLoggedIn);
-    console.log(this.afAuth.authState);
     this.afAuth.authState.subscribe(auth=> {this.isLoggedIn = !!auth;
-      console.log(this.isLoggedIn);
-      console.log(auth);
     });
   }
 

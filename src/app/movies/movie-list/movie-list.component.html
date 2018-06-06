@@ -1,10 +1,12 @@
-<div style="width:100%; position:fixed; bottom:0; margin-bottom:25px;">
-  <button style="float:left" mat-button color="primary" (click) = "updateViewPort(-1*viewPortSize)" class="mat-fab"> Previous </button>
-  <button style="float:right; margin-right:20px;" mat-button class="mat-fab" color="primary" (click) = "updateViewPort(viewPortSize)">
-    Next
-  </button>
+<div class="mat-toolbar" style="height:65px; text-align:center;" (window:resize)="onResize($event)">
+
+    <button style="float:left" mat-button color="primary" (click) = "updateViewPort(-1*viewPortSize)" class="mat-fab"> Previous </button>
+  <span> Filter: <input type="text" width="200" style="margin-top:25px;" [(ngModel)]="searchText" (ngModelChange)="getSearchResults()"/> </span>
+    <button style="float:right; margin-right:20px;" mat-button class="mat-fab" color="primary" (click) = "updateViewPort(viewPortSize)"> Next </button>
 
 </div>
+
+
 <ng-container *ngFor="let movie of movieViewPort$ | async">
   <app-movie-box [movieData]="movie"></app-movie-box>
 </ng-container>
