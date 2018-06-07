@@ -21,8 +21,7 @@ import {MovieDbapiserviceService} from "./movies/services/movie-dbapiservice.ser
 import { AuthorizationComponent } from './authorization/authorization.component';
 import { MovieBoxComponent } from './movies/movie-box/movie-box.component';
 import { MovieDetailComponent } from './movies/movie-detail/movie-detail.component';
-
-
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +35,7 @@ import { MovieDetailComponent } from './movies/movie-detail/movie-detail.compone
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
+    CoreModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,

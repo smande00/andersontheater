@@ -2,7 +2,9 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MovieDTO} from "../MovieDTO";
 import {MoviesService} from "../services/movies.service";
 import {MovieDbapiserviceService} from "../services/movie-dbapiservice.service";
-import {animate, style, transition, trigger} from "@angular/animations";
+import {animate, state, style, transition, trigger} from "@angular/animations";
+
+import {AuthService, User} from "../../core/auth.service";
 
 @Component({
   selector: 'app-movie-box',
@@ -11,12 +13,22 @@ import {animate, style, transition, trigger} from "@angular/animations";
   animations: [
 
     trigger('active', [
-      transition('inactive => active',
-        [style({transform:'translateY(-5px)'}),
-              animate('200ms ease-in'),
-              style({transform:'translateY(0px)'}),
-              animate('100ms')
-        ])
+      state('inactive', style({ transform: 'translateX(0) scale(1)' })),
+      state('active', style({ transform: 'translateX(0) scale(1.2)' })),
+      transition('inactive => active', animate('200ms ease-in')),
+      transition('active => inactive', animate('200ms ease-out')),
+      transition(
+        ':enter', [
+          style({ transform: 'scale(.7)', opacity: 0 }),
+          animate('0.3s', style({ opacity: 1, transform: 'scale(1)' })),
+        ]
+      ),
+      transition(
+        ':leave', [
+          style({ opacity: 1, transform: 'scale(1)' }),
+          animate('5.3s', style({ opacity: 0, transform: 'scale(.7)' })),
+        ]
+      )
     ]),
     trigger('zoomIn', [
       transition(':enter', [
@@ -32,10 +44,16 @@ export class MovieBoxComponent implements OnInit {
   @Input()  movieData:MovieDTO;
   @Output() movieClicked = new EventEmitter();
   activeState:string="inactive";
+  loggedInUser:User;
 
-  constructor(private movieService: MoviesService, private movieDbAPI: MovieDbapiserviceService) { }
+  constructor(private movieService: MoviesService, private movieDbAPI: MovieDbapiserviceService, public auth: AuthService) {
+
+  }
 
   ngOnInit() {
+    this.auth.user.subscribe((value) =>{
+      this.loggedInUser=value;
+    });
   }
 
   delete(){

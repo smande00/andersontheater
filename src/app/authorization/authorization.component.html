@@ -1,11 +1,7 @@
-<label for="email" class="label">Enter email to login</label><br>
-<input type="email" class="input" [(ngModel)]="email">
+<h3>Howdy, GUEST</h3>
+<p>Login to get started...</p>
 
 
-<button class="button is-primary"
-        [disabled]="emailSent"
-        (click)="sendEmailLink()">
-
-  Get Login Link
-
+<button (click)="login()">
+  <i class="fa fa-google"></i> Connect with Google
 </button>

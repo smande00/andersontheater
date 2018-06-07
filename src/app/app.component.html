@@ -1,10 +1,12 @@
 <div class="mat-toolbar">
   <button mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
   <mat-menu #menu="matMenu">
-    <a routerLink="/movie/new"><button class="mat-menu-item" >Add Movie</button></a>
+    <a *ngIf="!!loggedInUser && loggedInUser.isAdmin" routerLink="/movie/new"><button class="mat-menu-item" >Add Movie</button></a>
     <a routerLink="/"><button class="mat-menu-item" >List Movies</button></a>
   </mat-menu>
   <span>Anderson Theater</span>
+  <button *ngIf="!!loggedInUser" (click)="logout()">Logout</button>
+  <button *ngIf="loggedInUser === null" (click)="login()">Login</button>
 </div>
 <router-outlet>
 

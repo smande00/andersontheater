@@ -10,7 +10,8 @@ import 'rxjs/add/operator/debounceTime';
 import "rxjs/add/operator/distinctUntilChanged";
 import {MatDialog} from "@angular/material";
 import {MovieDetailComponent} from "../movie-detail/movie-detail.component";
-
+import {AuthService } from '../../core/auth.service';
+import {User} from "../../core/auth.service";
 
 
 @Component({
@@ -33,11 +34,13 @@ export class MovieListComponent implements OnInit {
   boxHeight:number=170;
   toolbarHeight:number=85;
 
-  constructor(private movieService: MoviesService, public dialog: MatDialog) {
+  constructor(private movieService: MoviesService, public dialog: MatDialog, public auth: AuthService) {
 
   }
 
   ngOnInit() {
+
+
     this.mapData(this.movieService.getMovies());
     this.onResize({
       target:

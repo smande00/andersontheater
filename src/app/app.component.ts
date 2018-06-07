@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AngularFireAuth} from "angularfire2/auth";
-
+import {AuthService, User} from './core/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,16 +7,23 @@ import {AngularFireAuth} from "angularfire2/auth";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  isLoggedIn:boolean=false;
   title = 'Anderson Theater';
-
-  constructor(private afAuth: AngularFireAuth) {
+  loggedInUser:User;
+  constructor( public auth: AuthService) {
+    this.auth.user.subscribe((value) =>{
+      this.loggedInUser=value;
+    });
   }
 
+  login() {
+    this.auth.googleLogin();
+  }
 
+  logout(){
+    this.auth.signOut();
+  }
   ngOnInit(): void {
-    this.afAuth.authState.subscribe(auth=> {this.isLoggedIn = !!auth;
-    });
+
   }
 
 }
