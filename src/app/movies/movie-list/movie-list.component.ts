@@ -75,7 +75,8 @@ export class MovieListComponent implements OnInit {
 
   onMovieClicked($event:MovieDTO){
     let dialogRef = this.dialog.open(MovieDetailComponent, {
-      width: '250px',
+      width: '400px',
+      autoFocus: false,
       data: $event
     });
   }

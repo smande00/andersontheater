@@ -1,7 +1,7 @@
-<h1 mat-dialog-title>{{data.title}}</h1>
+<div style="display:flex;"><h1 mat-dialog-title style="background-color:#fdecd7; flex: 1 1 auto">{{data.title}}</h1>  <button mat-icon-button color="primary" mat-dialog-close><mat-icon>clear</mat-icon></button> </div>
 <div mat-dialog-content>
+  <div style="float:left; margin-right:10px">
+    <img src= "{{ posterUrl(data.poster_path) }}" />
+  </div>
   <p>{{data.overview}}</p>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="closeClick()">Close</button>
 </div>

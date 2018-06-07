@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {MovieDTO} from "../MovieDTO";
+import {MovieDbapiserviceService} from "../services/movie-dbapiservice.service";
 
 @Component({
   selector: 'app-movie-detail',
@@ -9,13 +10,15 @@ import {MovieDTO} from "../MovieDTO";
 })
 export class MovieDetailComponent implements OnInit {
 
-  constructor(  public dialogRef: MatDialogRef<MovieDetailComponent>,
+  constructor(  private movieDbAPI: MovieDbapiserviceService,
+                public dialogRef: MatDialogRef<MovieDetailComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: MovieDTO)  { }
 
   ngOnInit() {
   }
 
-  closeClick(): void {
-    this.dialogRef.close();
+  posterUrl(poster:string){
+    return this.movieDbAPI.formatPosterURL(poster);
   }
+
 }
