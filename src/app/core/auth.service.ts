@@ -5,7 +5,7 @@ import { auth } from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { switchMap} from 'rxjs/operators';
 
 
@@ -36,7 +36,7 @@ export class AuthService {
         if (user) {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
         } else {
-          return Observable.of(null);
+          return of(null);
         }
       }));
 
