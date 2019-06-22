@@ -4,6 +4,7 @@ import {Observable} from "rxjs/Observable";
 
 import {MovieDTO} from "../MovieDTO";
 import "rxjs/add/operator/take";
+import "rxjs/add/operator/map";
 
 @Injectable()
 export class MoviesService {
@@ -11,7 +12,7 @@ export class MoviesService {
   constructor(private db: AngularFirestore) {
   }
 
-  public getMovies():Observable<DocumentChangeAction[]>{
+  public getMovies():Observable<DocumentChangeAction<MovieDTO>[]>{
     return this.db.collection<MovieDTO>("movies", ob => ob.orderBy("title")).snapshotChanges();
   }
 

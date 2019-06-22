@@ -64,7 +64,7 @@ export class MovieListComponent implements OnInit {
         });
   }
 
-  mapData(obs : Observable<DocumentChangeAction[]>) {
+  mapData(obs : Observable<DocumentChangeAction<MovieDTO>[]>) {
     obs.subscribe(docs => {
       this.allMovies = [];
       console.log(docs.length);
