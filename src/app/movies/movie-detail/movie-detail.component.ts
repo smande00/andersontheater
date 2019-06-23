@@ -20,7 +20,7 @@ export class MovieDetailComponent implements OnInit {
                 private movieService: MoviesService,
                 private authService: AuthService,
                 public dialogRef: MatDialogRef<MovieDetailComponent>,
-                @Inject(MAT_DIALOG_DATA) private data: any)  { }
+                @Inject(MAT_DIALOG_DATA) public data: any)  { }
 
   ngOnInit() {
     this.authService.loggedInUser().asObservable().subscribe((u)=>{
