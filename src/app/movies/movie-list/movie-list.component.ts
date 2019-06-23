@@ -35,6 +35,8 @@ export class MovieListComponent implements OnInit {
   boxHeight:number=170;
   toolbarHeight:number=85;
 
+  public filterUnwatched: boolean = true;
+
   constructor(private movieService: MoviesService, public dialog: MatDialog, public auth: AuthService) {
 
   }
@@ -76,6 +78,7 @@ export class MovieListComponent implements OnInit {
         this.lastKey = doc.payload.doc;
         this.allUserMovies[doc.payload.doc.data().id] = doc.payload.doc.data();
       });
+      this.loadViewPort();
    });
   }
   
@@ -92,8 +95,6 @@ export class MovieListComponent implements OnInit {
   }
 
   onMovieClicked($event:MovieDTO){
-    console.log('movie:');
-    console.log(this.allUserMovies[$event.id]);
     let dialogRef = this.dialog.open(MovieDetailComponent, {
       width: '400px',
       autoFocus: false,
@@ -114,8 +115,17 @@ export class MovieListComponent implements OnInit {
 
     let filteredSet = this.allMovies
       .filter((f)=> {
+        var userData = this.allUserMovies[f.id];
         if(f.title.toLowerCase().indexOf(this.searchText.toLowerCase())!==-1 || this.searchText===""){
-          return f;
+          if(this.filterUnwatched){
+            if(userData == null || userData == undefined || !userData.watched ){
+             // console.log(f)
+              return f;
+            }
+          }
+          else if(userData != undefined && userData.watched){
+             return f;
+          }
         }});
     this.hasMoreResults = (filteredSet.length > this.viewPortStart + this.viewPortSize);
 
@@ -135,4 +145,8 @@ export class MovieListComponent implements OnInit {
     this.filterChanged.next(this.searchText);
   }
 
+  toggleWatchedFilter(){
+    this.filterUnwatched = !this.filterUnwatched;
+    this.loadViewPort();
+  }
 }
