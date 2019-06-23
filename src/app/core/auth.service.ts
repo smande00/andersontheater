@@ -5,7 +5,7 @@ import { auth } from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { switchMap} from 'rxjs/operators';
 
 
@@ -23,6 +23,7 @@ export interface User {
 export class AuthService {
 
   user: Observable<User>;
+  user$: BehaviorSubject<User>;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -40,6 +41,11 @@ export class AuthService {
         }
       }));
 
+      this.user$ = new BehaviorSubject<User>(null);
+      this.user.subscribe((u)=> {
+        this.user$.next(u);
+      });
+
   }
 
   public googleLogin() {
@@ -54,6 +60,9 @@ export class AuthService {
       })
   }
 
+  public loggedInUser(){
+    return this.user$;
+  }
 
   private updateUserData(user) {
     // Sets user data to firestore on login

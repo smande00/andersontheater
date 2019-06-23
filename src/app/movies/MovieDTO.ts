@@ -6,3 +6,8 @@ export interface MovieDTO{
   release_date : string;
 }
 
+export interface UserMovieDTO{
+  user_id: string;
+  id:number;
+  watched: boolean;
+}
