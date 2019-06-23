@@ -1,7 +1,16 @@
-<div style="display:flex;"><h1 mat-dialog-title style="background-color:#fdecd7; flex: 1 1 auto">{{data.title}}</h1>  <button mat-icon-button color="primary" mat-dialog-close><mat-icon>clear</mat-icon></button> </div>
+<div style="display:flex;">
+  <h1 mat-dialog-title style="background-color:#fdecd7; flex: 1 1 auto">{{data.movieDTO.title}}</h1> 
+   <button mat-icon-button color="primary" mat-dialog-close>
+     <mat-icon>clear</mat-icon>
+    </button> 
+</div>
 <div mat-dialog-content>
   <div style="float:left; margin-right:10px">
-    <img src= "{{ posterUrl(data.poster_path) }}" />
+    <img src= "{{ posterUrl(data.movieDTO.poster_path) }}" />
   </div>
-  <p>{{data.overview}}</p>
+  <p>{{data.movieDTO.overview}}</p>
+  <div>
+    <mat-icon  (click)="toggleViewed()">{{data.userMovieDTO?.watched ? "visibility" : "visibility_off"}}</mat-icon>
+    
+  </div>
 </div>
