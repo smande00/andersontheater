@@ -22,6 +22,8 @@ import { AuthorizationComponent } from './authorization/authorization.component'
 import { MovieBoxComponent } from './movies/movie-box/movie-box.component';
 import { MovieDetailComponent } from './movies/movie-detail/movie-detail.component';
 import { CoreModule } from './core/core.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +44,7 @@ import { CoreModule } from './core/core.module';
     AngularFireAuthModule,
     AppRoutingModule,
     HttpClientModule,
-    MatButtonModule,MatIconModule,  MatMenuModule, MatDialogModule
+    MatButtonModule,MatIconModule,  MatMenuModule, MatDialogModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [MoviesService, MovieDbapiserviceService],
   bootstrap: [AppComponent],

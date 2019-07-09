@@ -23,6 +23,8 @@
     "@angular/router": "^8.0.2",
     "@angular/material": "^8.0.1",
     "@angular/fire": "^5.2.1",
+    "@angular/pwa": "^0.801.0",
+    "@angular/service-worker": "^8.0.2",
     "angularfire2": "5.2.1",
     "firebase": "6.2.2",
     "core-js": "^2.4.1",
